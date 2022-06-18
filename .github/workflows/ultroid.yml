@@ -34,7 +34,9 @@ jobs:
          timeout-minutes: 350
          continue-on-error: true
          run: |
-           sudo sh action.sh
+           cd mast || exit 1
+           docker build . --rm --force-rm --compress --pull --file Dockerfile -t kai84
+           docker run --privileged --rm -i kai84
        - name: Loop workflow
          continue-on-error: true
          run: |
